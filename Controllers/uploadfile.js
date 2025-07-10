@@ -1,5 +1,6 @@
 const filedata = require("../model/uploadModel");
 const path = require("path");
+const fs = require("fs");
 
 const fileupload = async(req,res)=>{
     try
@@ -11,7 +12,7 @@ const fileupload = async(req,res)=>{
             const upl = await filedata.create({
                 filename:filename
             });
-            res.status(200).json({message:"uploaded successfully"});
+            res.status(200).json({message:"uploaded successfully",det:{upl}});
         }
     }
     catch(e)
@@ -51,4 +52,38 @@ const download = async(req,res)=>{
 }
 
 
-module.exports= {fileupload,download}
+ const delefile = async(req,res)=>{
+    try{
+        const isfind = await filedata.findById(req.params.id)
+        if(!isfind)
+        {
+            res.status(400).json({message:"No such file exits"});
+        }   
+        else
+        {
+
+            const filepath = path.join(__dirname,"..","uploads",isfind.filename);
+            console.log("this file path",filepath);
+            const dirdel=fs.unlink(filepath,async(err)=>{
+                if(err)
+                {
+                    res.status(500).json({message:"Error while deletng file from dir"});
+                }
+            });
+ 
+                const dee = await filedata.deleteOne({_id:req.params.id});
+                if(dee)
+                {
+                    res.status(200).json({message:"Deleted Successfully"})
+                }
+            
+        }
+    }
+    catch(e)
+    {
+        console.log(e);
+        res.status(500).json({ message: "Server error", error: e.message });
+
+    }
+ }
+module.exports= {fileupload,download,delefile}
