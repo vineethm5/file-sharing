@@ -86,4 +86,23 @@ const download = async(req,res)=>{
 
     }
  }
-module.exports= {fileupload,download,delefile}
+
+ const getall = async(req,res)=>{
+    try{
+        const allfiles = await filedata.find();
+        if(allfiles)
+        {
+            res.status(200).json({allfiles});
+        }
+        else
+        {
+            res.status(400).json({message:"something went wrong"});
+        }
+    }
+    catch(e)
+    {
+        res.status(400).json({error:e})
+    }
+    
+ }
+module.exports= {fileupload,download,delefile,getall}

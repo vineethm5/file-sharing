@@ -1,80 +1,96 @@
-**A simple Node.js + Express application that allows users to upload, download, and manage files via RESTful APIs.**
+# File Sharing API
 
+A simple Node.js + Express application that allows users to upload, download, and manage files via RESTful APIs.
 
-🚀 **Features**
+---
 
-📄 Upload files via REST API
+## 🚀 Features
 
-📅 Download files using unique IDs
+- Upload files via REST API
+- Download files using unique IDs
+- List all uploaded files
+- Delete files by ID
+- File metadata stored in MongoDB
+- Multer-based storage with support for any file type
+- Ready for Docker containerization
 
-📋 List all uploaded files
+---
 
-❌ Delete files by ID
+## 💠 Tech Stack
 
-📈 File metadata stored in MongoDB
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB + Mongoose
+- **File Handling:** Multer
+- **Testing:** Postman
 
-📂 Multer-based storage with support for any file type
+---
 
-📦 Ready for Docker containerization
+## 📂 Folder Structure
 
---------------------------------------------------------------------------------------------------------------------
-💠 **Tech Stack**
-
-Backend: Node.js, Express.js
-
-Database: MongoDB + Mongoose
-
-File Handling: Multer
-
-Deployment: Docker, Postman for testing
-
---------------------------------------------------------------------------------------------------------------------
-
-📂 **Folder Structure**
-
+```
 project-root/
-├── controllers/
-│   └── fileController.js
-├── models/
-│   └── fileSchema.js
-├── routes/
-│   └── fileRoutes.js
+├── Controllers/
+│   └── uploadfile.js
+├── model/
+│   └── uploadModel.js
+├── routers/
+│   └── filerouter.js
+├── middleware/
+│   └── uplo.js
+├── config/
+│   └── uploadConfig.js
 ├── uploads/
 │   └── (uploaded files stored here)
 ├── .gitignore
-├── app.js
-├── Dockerfile
+├── index.js
 ├── package.json
 └── README.md
+```
 
---------------------------------------------------------------------------------------------------------------------
+---
 
-⚙️ **API Endpoints**
+## ⚙️ API Endpoints
 
-POST /api/files
-Content-Type: multipart/form-data
-Body: file=<file>
+### Upload File
 
-**Get All Files**
+    POST http://localhost:5000/fileupload/
+    Content-Type: multipart/form-data
+    Body: file=<file>
 
-GET /api/files
+### Get All Files
 
-**Download File**
+    GET http://localhost:5000/fileupload/
 
-GET /api/files/:id
+### Download File
 
-**Delete File**
+    GET http://localhost:5000/fileupload/:id
 
-DELETE /api/files/:id
+### Delete File
 
---------------------------------------------------------------------------------------------------------------------
+    DELETE http://localhost:5000/fileupload/:id
 
-▶️ **Getting Started**
+---
 
-1. Clone the Repository
+## ▶️ Getting Started
 
---------------------------------------------------------------------------------------------------------------------
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/vineethm5/file-sharing.git
+   cd file-sharing
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Set up your MongoDB connection string in the environment/config file.
+4. Start the server:
+   ```sh
+   npm start
+   ```
+5. Use Postman or similar tools to test the API endpoints.
 
-👨‍💻 **Author**
+---
+
+## 👨‍💻 Author
 
 Vineeth M
